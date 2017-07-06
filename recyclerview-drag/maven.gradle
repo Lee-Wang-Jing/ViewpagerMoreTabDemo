@@ -24,8 +24,8 @@ install {
                 }
                 developers {
                     developer {
-                        id 'wangjing'
-                        name 'wangjing'
+                        id 'wangjinggm'
+                        name 'wangjinggm'
                         email 'wangjinggm@gmail.com'
                     }
                 }
@@ -68,9 +68,9 @@ bintray {
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
-        repo = "maven"
+        repo = "mymaven"
         name = "recyclerview-drag"                // project name in jcenter
-        userOrg = 'wangjing' // Bintray的用户名，2016年11月更新。
+        userOrg = 'wangjinggm' // Bintray的用户名，2016年11月更新。
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
