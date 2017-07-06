@@ -1,1 +1,1 @@
-include ':app', ':recyclerview_drag'
+include ':app', ':recyclerview-drag'
