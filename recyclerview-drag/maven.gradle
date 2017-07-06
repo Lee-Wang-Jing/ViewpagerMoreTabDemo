@@ -70,7 +70,7 @@ bintray {
     pkg {
         repo = "maven"
         name = "recyclerview-drag"                // project name in jcenter
-        userOrg = 'wangjinggm' // Bintray的用户名，2016年11月更新。
+        userOrg = 'wangjing' // Bintray的用户名，2016年11月更新。
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
