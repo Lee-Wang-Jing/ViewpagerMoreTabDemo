@@ -24,8 +24,8 @@ install {
                 }
                 developers {
                     developer {
-                        id 'wangjinggm'
-                        name 'wangjinggm'
+                        id 'wangjing'
+                        name 'wangjing'
                         email 'wangjinggm@gmail.com'
                     }
                 }

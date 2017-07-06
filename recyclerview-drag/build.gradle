@@ -25,4 +25,5 @@ dependencies {
 }
 
 apply from: "maven.gradle"
+//apply from: "bintrayUpload.gradle"
 
