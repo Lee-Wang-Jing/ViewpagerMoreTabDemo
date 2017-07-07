@@ -1,6 +1,9 @@
 # RecyclerView-Drag
 RecyclerView-Drag
 
+# recyclerView-drag [![](https://ci.novoda.com/buildStatus/icon?job=bintray-release)](https://ci.novoda.com/job/bintray-release/lastBuild/console) [![Download](https://api.bintray.com/packages/wangjinggm/maven/recyclerview-drag/images/download.svg) ](https://bintray.com/wangjinggm/maven/recyclerview-drag/_latestVersion) [![](https://raw.githubusercontent.com/Lee-Wang-Jing/Lee-Wang-Jing/master/assets/btn_apache_lisence.png)](LICENSE.txt)
+
+
 技术交流群：598627802，加群前请务必阅读[群行为规范](https://github.com/Lee-Wang-Jing/GroupStandard)     
 有问题或者某种需求欢迎加群或者提issues，Thanks
 ----
