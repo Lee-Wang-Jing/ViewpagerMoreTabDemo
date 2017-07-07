@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private Button btn_tab;
+    private Button btn_tab,btn_drag;
 
     private MyPagerAdapter pagerAdapter;
 
@@ -43,10 +43,18 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         btn_tab = (Button) findViewById(R.id.btn_tab);
+        btn_drag = (Button) findViewById(R.id.btn_drag);
+
         btn_tab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, ChooseTabActivity.class));
+            }
+        });
+        btn_drag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, DragTabActivity.class));
             }
         });
         for (int i = 0; i < mTitles.length; i++) {

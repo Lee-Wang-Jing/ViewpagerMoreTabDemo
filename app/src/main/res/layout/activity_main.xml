@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <Button
+        android:id="@+id/btn_drag"
+        android:layout_width="match_parent"
+        android:text="自定义拖拽 第0条不能被拖拽"
+        android:layout_height="40dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +32,8 @@
         <Button
             android:id="@+id/btn_tab"
             android:layout_width="40dp"
+            android:text="更多"
+            android:textSize="8sp"
             android:layout_height="40dp" />
     </LinearLayout>
 
