@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private Button btn_tab,btn_drag;
+    private Button btn_tab,btn_drag,btn_longdrag;
 
     private MyPagerAdapter pagerAdapter;
 
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         btn_tab = (Button) findViewById(R.id.btn_tab);
         btn_drag = (Button) findViewById(R.id.btn_drag);
+        btn_longdrag = (Button) findViewById(R.id.btn_longdrag);
 
         btn_tab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, DragTabActivity.class));
             }
         });
+
+        btn_longdrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, LongDragTabActivity.class));
+            }
+        });
+
         for (int i = 0; i < mTitles.length; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(mTitles[i]));
             mFragments.add(MyFragment.newInstance(mTitles[i]));
