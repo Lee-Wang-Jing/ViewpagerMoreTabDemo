@@ -1,7 +1,7 @@
 # RecyclerView-Drag
 RecyclerView-Drag
 
-技术交流群：598627802，加群前请务必阅读[群行为规范](https://github.com/Lee-Wang-Jing/GroupStandard)。
+技术交流群：598627802，加群前请务必阅读[群行为规范](https://github.com/Lee-Wang-Jing/GroupStandard)     
 有问题或者某种需求欢迎加群或者提issues，Thanks
 ----
 # Features
