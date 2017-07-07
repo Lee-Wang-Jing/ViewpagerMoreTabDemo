@@ -7,7 +7,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -67,6 +66,7 @@ public class ChooseTabActivity extends AppCompatActivity {
         recyclerview = (DragRecyclerView) findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerview.setItemAnimator(new DefaultItemAnimator());
+        recyclerview.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
         adapter = new ChooseTabActivityAdapter(recyclerview);
         recyclerview.setAdapter(adapter);
         recyclerview.setLongPressDragEnabled(true);
@@ -87,7 +87,14 @@ public class ChooseTabActivity extends AppCompatActivity {
     private OnItemMoveListener onItemMoveListener = new OnItemMoveListener() {
         @Override
         public boolean onItemMove(int fromPosition, int toPosition) {
-            Collections.swap(infos, fromPosition, toPosition);
+            Log.e("onItemMove", "onItemMove");
+            if (fromPosition < toPosition) {
+                for (int i = fromPosition; i < toPosition; i++)
+                    Collections.swap(infos, i, i + 1);
+            } else {
+                for (int i = fromPosition; i > toPosition; i--)
+                    Collections.swap(infos, i, i - 1);
+            }
             adapter.notifyItemMoved(fromPosition, toPosition);
             return true;
         }
@@ -106,15 +113,18 @@ public class ChooseTabActivity extends AppCompatActivity {
      */
     private OnItemStateChangedListener mOnItemStateChangedListener = (viewHolder, actionState) -> {
         if (actionState == OnItemStateChangedListener.ACTION_STATE_DRAG) {
-            Log.e("StateChangedListener","状态：拖拽");
+            Log.e("StateChangedListener", "状态：拖拽");
             // 拖拽的时候背景就透明了，这里我们可以添加一个特殊背景。
             viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(this, R.color.white_pressed));
         } else if (actionState == OnItemStateChangedListener.ACTION_STATE_SWIPE) {
-            Log.e("StateChangedListener","状态：滑动删除");
+            Log.e("StateChangedListener", "状态：滑动删除");
         } else if (actionState == OnItemStateChangedListener.ACTION_STATE_IDLE) {
-            Log.e("StateChangedListener","状态：手指松开");
+            Log.e("StateChangedListener", "状态：手指松开");
             // 在手松开的时候还原背景。
             ViewCompat.setBackground(viewHolder.itemView, ContextCompat.getDrawable(this, R.drawable.select_white));
+            for (int i = 0; i < adapter.getData().size(); i++) {
+                Log.e("StateChangedListener", i + "==>" + adapter.getData().get(i));
+            }
         }
     };
 

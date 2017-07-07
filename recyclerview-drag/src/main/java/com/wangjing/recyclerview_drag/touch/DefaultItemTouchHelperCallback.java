@@ -35,7 +35,7 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private OnItemStateChangedListener onItemStateChangedListener;
 
-    private boolean isItemViewSwipeEnabled;
+//    private boolean isItemViewSwipeEnabled;
 
     private boolean isLongPressDragEnabled;
 
@@ -49,15 +49,6 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public boolean isLongPressDragEnabled() {
         return isLongPressDragEnabled;
-    }
-
-    public void setItemViewSwipeEnabled(boolean canSwipe) {
-        this.isItemViewSwipeEnabled = canSwipe;
-    }
-
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        return isItemViewSwipeEnabled;
     }
 
     public void setOnItemMoveListener(OnItemMoveListener onItemMoveListener) {
@@ -96,7 +87,7 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
             if (layoutManager instanceof GridLayoutManager) {
                 //拖拽的方向。
                 int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                int swipeFlags = 0;
                 //侧滑的方向：left right。
                 return makeMovementFlags(dragFlags, swipeFlags);
             } else if (layoutManager instanceof LinearLayoutManager) {
@@ -104,13 +95,13 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
                 if (linearLayoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                     int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                    int swipeFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                    int swipeFlags = 0;
                     return makeMovementFlags(dragFlags, swipeFlags);
                 } else {
                     //拖拽的方向。
                     int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
                     //侧滑的方向：left right。
-                    int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                    int swipeFlags = 0;
                     return makeMovementFlags(dragFlags, swipeFlags);
                 }
             }

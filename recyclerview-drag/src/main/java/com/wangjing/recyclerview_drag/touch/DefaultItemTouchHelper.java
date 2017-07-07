@@ -96,16 +96,6 @@ public class DefaultItemTouchHelper extends CompatItemTouchHelper {
         return mDefaultItemTouchHelperCallback.isLongPressDragEnabled();
     }
 
-
-    /**
-     * Set can long press swipe.
-     *
-     * @param canSwipe swipe true, otherwise is can't.
-     */
-    public void setItemViewSwipeEnabled(boolean canSwipe) {
-        mDefaultItemTouchHelperCallback.setItemViewSwipeEnabled(canSwipe);
-    }
-
     /**
      * Get can long press swipe.
      *

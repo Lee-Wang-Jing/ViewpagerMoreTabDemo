@@ -44,10 +44,18 @@ public class ChooseTabActivityAdapter extends RecyclerView.Adapter<ChooseTabActi
 
     public void addData(List<String> infos) {
         if (infos != null) {
-            this.infos.clear();
-            this.infos.addAll(infos);
+//            this.infos.clear();
+//            this.infos.addAll(infos);
+            this.infos=infos;
             notifyDataSetChanged();
         }
+    }
+
+    public List<String> getData() {
+        if (infos == null) {
+            infos = new ArrayList<>();
+        }
+        return this.infos;
     }
 
     @Override
