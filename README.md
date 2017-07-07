@@ -111,6 +111,69 @@ swipeRecyclerView.startDrag(ViewHolder);
 ```
 这里只要传入当前触摸`Item`对应的`ViewHolder`即可立即开始拖拽。
 
+* 设置某个position不能拖拽
+添加监听
+```java
+  recyclerview.setOnItemMovementListener(onItemMovementListener);
+```
+```java
+   /**
+       * 当Item被移动之前。
+       */
+      public static OnItemMovementListener onItemMovementListener = new OnItemMovementListener() {
+          /**
+           * 当Item在移动之前，获取拖拽的方向。
+           * @param recyclerView     {@link RecyclerView}.
+           * @param targetViewHolder target ViewHolder.
+           * @return
+           */
+          @Override
+          public int onDragFlags(RecyclerView recyclerView, RecyclerView.ViewHolder targetViewHolder) {
+              // 我们让第一个不能拖拽。
+              if (targetViewHolder.getAdapterPosition() == 0) {
+                  return OnItemMovementListener.INVALID;// 返回无效的方向。
+              }
+  
+              RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+  //            if (layoutManager instanceof LinearLayoutManager) {// 如果是LinearLayoutManager。
+  //                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+  //                if (linearLayoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {// 横向的List。
+  //                    return (OnItemMovementListener.LEFT | OnItemMovementListener.RIGHT); // 只能左右拖拽。
+  //                } else {// 竖向的List。
+  //                    return OnItemMovementListener.UP | OnItemMovementListener.DOWN; // 只能上下拖拽。
+  //                }
+  //            }
+  //            else
+              if (layoutManager instanceof GridLayoutManager) {// 如果是Grid。
+                  return OnItemMovementListener.LEFT | OnItemMovementListener.RIGHT | OnItemMovementListener.UP |
+                          OnItemMovementListener.DOWN; // 可以上下左右拖拽。
+              }
+              return OnItemMovementListener.INVALID;// 返回无效的方向。
+          }
+  
+          @Override
+          public int onSwipeFlags(RecyclerView recyclerView, RecyclerView.ViewHolder targetViewHolder) {
+  //            // 我们让第一个不能滑动删除。
+  //            if (targetViewHolder.getAdapterPosition() == 0) {
+  //                return OnItemMovementListener.INVALID;// 返回无效的方向。
+  //            }
+  //
+  //            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+  //            if (layoutManager instanceof LinearLayoutManager) {// 如果是LinearLayoutManager
+  //                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+  //                if (linearLayoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {// 横向的List。
+  //                    return OnItemMovementListener.UP | OnItemMovementListener.DOWN; // 只能上下滑动删除。
+  //                } else {// 竖向的List。
+  //                    return OnItemMovementListener.LEFT | OnItemMovementListener.RIGHT; // 只能左右滑动删除。
+  //                }
+  //            }
+              return OnItemMovementListener.INVALID;// 其它均返回无效的方向。
+          }
+      };
+```
+这里可以设置某个position不能拖拽或者滑动删除(Features版本支持)
+
+
 # Thanks
 * [SwipeMenu](https://github.com/TUBB/SwipeMenu/)
 * [SwipeRecyclerView](https://github.com/yanzhenjie/SwipeRecyclerView)
