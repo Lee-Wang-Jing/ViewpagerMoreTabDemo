@@ -9,9 +9,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.qianfan.viewpagermoretabdemo.adapter.ChooseTabActivityAdapter;
 import com.qianfan.viewpagermoretabdemo.adapter.LongDragTabActivityAdapter;
 import com.wangjing.recyclerview_drag.DragRecyclerView;
 import com.wangjing.recyclerview_drag.touch.OnItemMoveListener;
@@ -29,9 +30,11 @@ import java.util.List;
  * 最近修改：2017/7/6 10:11 by WangJing
  */
 
-public class LongDragTabActivity extends AppCompatActivity {
+public class LongDragTabActivity extends AppCompatActivity implements OnTabLongClick {
+    private Button btn_drag;
     private DragRecyclerView recyclerview;
     private LongDragTabActivityAdapter adapter;
+
 
     private final String[] mTitles = {
             "头条", "视频"
@@ -65,7 +68,8 @@ public class LongDragTabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choosttab);
+        setContentView(R.layout.activity_longdragtab);
+        btn_drag = (Button) findViewById(R.id.btn_drag);
         recyclerview = (DragRecyclerView) findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerview.setItemAnimator(new DefaultItemAnimator());
@@ -76,7 +80,20 @@ public class LongDragTabActivity extends AppCompatActivity {
         recyclerview.setOnItemMoveListener(onItemMoveListener);// 监听拖拽，更新UI。
         recyclerview.setOnItemStateChangedListener(mOnItemStateChangedListener);
         recyclerview.setOnItemMovementListener(onItemMovementListener);
-
+        adapter.setOnTabLongClick(this);
+        btn_drag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (adapter.isNeedDrag()) {
+                    adapter.setNeedDrag(false);
+                    btn_drag.setText("编辑");
+                } else {
+                    adapter.setNeedDrag(true);
+                    btn_drag.setText("取消");
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
         infos = new ArrayList<>();
         for (int i = 0; i < mTitles.length; i++) {
             infos.add(mTitles[i]);
@@ -164,7 +181,7 @@ public class LongDragTabActivity extends AppCompatActivity {
 //                }
 //            }
 //            else
-                if (layoutManager instanceof GridLayoutManager) {// 如果是Grid。
+            if (layoutManager instanceof GridLayoutManager) {// 如果是Grid。
                 return OnItemMovementListener.LEFT | OnItemMovementListener.RIGHT | OnItemMovementListener.UP |
                         OnItemMovementListener.DOWN; // 可以上下左右拖拽。
             }
@@ -190,4 +207,9 @@ public class LongDragTabActivity extends AppCompatActivity {
             return OnItemMovementListener.INVALID;// 其它均返回无效的方向。
         }
     };
+
+    @Override
+    public void onTabLongClick() {
+        btn_drag.setText("取消");
+    }
 }

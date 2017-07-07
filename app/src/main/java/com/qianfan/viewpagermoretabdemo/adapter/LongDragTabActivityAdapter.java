@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.qianfan.viewpagermoretabdemo.OnTabLongClick;
 import com.qianfan.viewpagermoretabdemo.R;
 import com.wangjing.recyclerview_drag.DragRecyclerView;
 
@@ -30,6 +31,8 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
 
     private boolean needDrag = false;
 
+    private OnTabLongClick onTabLongClick;
+
     public LongDragTabActivityAdapter() {
         this.infos = new ArrayList<>();
     }
@@ -39,16 +42,17 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
         this.recyclerview = recyclerview;
     }
 
-    public void setNeedDrag(boolean needDrag) {
-        this.needDrag = needDrag;
-        notifyDataSetChanged();
+    public void setOnTabLongClick(OnTabLongClick onTabLongClick) {
+        this.onTabLongClick = onTabLongClick;
     }
 
-//    public void refresh(){
-//        if (!needDrag){
-//            notifyDataSetChanged();
-//        }
-//    }
+    public boolean isNeedDrag() {
+        return needDrag;
+    }
+
+    public void setNeedDrag(boolean needDrag) {
+        this.needDrag = needDrag;
+    }
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,8 +62,6 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
 
     public void addData(List<String> infos) {
         if (infos != null) {
-//            this.infos.clear();
-//            this.infos.addAll(infos);
             this.infos = infos;
             notifyDataSetChanged();
         }
@@ -79,6 +81,9 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
             @Override
             public boolean onLongClick(View view) {
                 needDrag = true;
+                if (onTabLongClick != null) {
+                    onTabLongClick.onTabLongClick();
+                }
                 notifyDataSetChanged();
                 return true;
             }
@@ -89,11 +94,11 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
             holder.imv_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.e("onClick","position==>"+position);
+                    Log.e("onClick", "position==>" + position);
                     infos.remove(position);
                     notifyItemRemoved(position);
                     //notifyItemRemoved造成Position混乱的问题,remove之后需要刷新一下
-                    notifyItemRangeChanged(0,infos.size());
+                    notifyItemRangeChanged(0, infos.size());
                 }
             });
             holder.btn_name.setOnTouchListener(new View.OnTouchListener() {
