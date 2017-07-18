@@ -21,9 +21,9 @@ package android.support.v7.widget.helper;
  * 描述：TODO
  * 最近修改：2017/7/6 10:11 by WangJing
  */
-public class CompatItemTouchHelper extends ItemTouchHelper {
+public class WJCompatItemTouchHelper extends ItemTouchHelper {
 
-    public CompatItemTouchHelper(ItemTouchHelper.Callback callback) {
+    public WJCompatItemTouchHelper(Callback callback) {
         super(callback);
     }
 
@@ -32,7 +32,7 @@ public class CompatItemTouchHelper extends ItemTouchHelper {
      *
      * @return {@link Callback}
      */
-    public ItemTouchHelper.Callback getCallback() {
+    public Callback getCallback() {
         return mCallback;
     }
 }
