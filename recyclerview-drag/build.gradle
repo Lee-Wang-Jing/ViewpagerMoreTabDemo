@@ -8,6 +8,8 @@ android {
     defaultConfig {
         versionCode 1
         versionName "1.0"
+        minSdkVersion 14
+        targetSdkVersion 26
     }
     buildTypes {
         release {
@@ -24,8 +26,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.android.support:appcompat-v7:26.+'
-    provided 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    provided 'com.android.support:appcompat-v7:26.0.0-beta2'
+    provided 'com.android.support:recyclerview-v7:26.0.0-beta2'
 }
 
 allprojects {

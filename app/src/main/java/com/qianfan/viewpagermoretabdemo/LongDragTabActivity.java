@@ -72,7 +72,7 @@ public class LongDragTabActivity extends AppCompatActivity implements OnTabLongC
         btn_drag = (Button) findViewById(R.id.btn_drag);
         recyclerview = (DragRecyclerView) findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
-        recyclerview.setItemAnimator(new DefaultItemAnimator());
+//        recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
         adapter = new LongDragTabActivityAdapter(recyclerview);
         recyclerview.setAdapter(adapter);
@@ -150,7 +150,10 @@ public class LongDragTabActivity extends AppCompatActivity implements OnTabLongC
             for (int i = 0; i < adapter.getData().size(); i++) {
                 Log.e("StateChangedListener", i + "==>" + adapter.getData().get(i));
             }
+            //notifyItemRemoved造成Position混乱的问题,remove之后需要刷新一下
+            adapter.notifyItemRangeChanged(0, infos.size());
         }
+
     };
 
 
