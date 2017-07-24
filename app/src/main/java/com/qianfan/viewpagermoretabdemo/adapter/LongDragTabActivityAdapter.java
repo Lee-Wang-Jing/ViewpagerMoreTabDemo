@@ -95,10 +95,11 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
                 @Override
                 public void onClick(View view) {
                     Log.e("onClick", "position==>" + position);
-                    infos.remove(position);
-                    notifyItemRemoved(position);
+                    Log.e("onClick", "getLayoutPosition==>" + holder.getLayoutPosition());
+                    infos.remove(holder.getLayoutPosition());
+                    notifyItemRemoved(holder.getLayoutPosition());
                     //notifyItemRemoved造成Position混乱的问题,remove之后需要刷新一下
-                    notifyItemRangeChanged(0, infos.size());
+//                    notifyItemRangeChanged(0, infos.size());
                 }
             });
             holder.btn_name.setOnTouchListener(new View.OnTouchListener() {

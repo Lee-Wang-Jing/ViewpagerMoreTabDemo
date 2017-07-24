@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -114,10 +113,10 @@ public class LongDragTabActivity extends AppCompatActivity implements OnTabLongC
             }
             if (fromPosition < toPosition) {
                 for (int i = fromPosition; i < toPosition; i++)
-                    Collections.swap(infos, i, i + 1);
+                    Collections.swap(adapter.getData(), i, i + 1);
             } else {
                 for (int i = fromPosition; i > toPosition; i--)
-                    Collections.swap(infos, i, i - 1);
+                    Collections.swap(adapter.getData(), i, i - 1);
             }
             adapter.notifyItemMoved(fromPosition, toPosition);
             return true;
@@ -125,6 +124,7 @@ public class LongDragTabActivity extends AppCompatActivity implements OnTabLongC
 
         @Override
         public void onItemDismiss(int position) {
+            Log.e("onItemDismiss", "onItemDismiss");
             infos.remove(position);
             adapter.notifyItemRemoved(position);
             Toast.makeText(LongDragTabActivity.this, "现在的第" + position + "条被删除。", Toast.LENGTH_SHORT).show();
@@ -151,7 +151,7 @@ public class LongDragTabActivity extends AppCompatActivity implements OnTabLongC
                 Log.e("StateChangedListener", i + "==>" + adapter.getData().get(i));
             }
             //notifyItemRemoved造成Position混乱的问题,remove之后需要刷新一下
-            adapter.notifyItemRangeChanged(0, infos.size());
+//            adapter.notifyItemRangeChanged(0, infos.size());
         }
 
     };
