@@ -108,7 +108,9 @@ public class LongDragTabActivityAdapter extends RecyclerView.Adapter<LongDragTab
                     int action = motionEvent.getAction();
                     switch (action) {
                         case MotionEvent.ACTION_DOWN: {
-                            recyclerview.startDrag(holder);
+                            if (needDrag){
+                                recyclerview.startDrag(holder);
+                            }
                             break;
                         }
                     }
